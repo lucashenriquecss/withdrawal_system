@@ -8,12 +8,11 @@ import com.example.withdrawal_system.domain.port.output.OrderRepository;
 @Repository
 public class JpaOrderRepository implements OrderRepository {
 
-    private final OrderRepository repository;
+    private final org.springframework.data.jpa.repository.JpaRepository<Order, Long> repository;
 
-    public JpaOrderRepository(OrderRepository repository) {
+    public JpaOrderRepository(org.springframework.data.jpa.repository.JpaRepository<Order, Long> repository) {
         this.repository = repository;
     }
-
     @Override
     public Order save(Order order) {
         return repository.save(order);
@@ -24,8 +23,8 @@ public class JpaOrderRepository implements OrderRepository {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-    @Override
-    public Order findByQrCode(String qrCode) {
-        return repository.findByQrCode(qrCode).orElseThrow(() -> new RuntimeException("Order not found"));
-    }
+    // @Override
+    // public Order findByQrCode(String qrCode) {
+    //     return repository.findByQrCode(qrCode).orElseThrow(() -> new RuntimeException("Order not found"));
+    // }
 }
